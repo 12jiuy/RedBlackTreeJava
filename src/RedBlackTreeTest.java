@@ -1,6 +1,4 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +9,7 @@ import static org.junit.Assert.*;
 public class RedBlackTreeTest {
     private RedBlackTree<Integer> rbt;
     private RedBlackTree<Integer> rbtFull;
+    private RedBlackTree<Integer> rbtFullMinus;
     private Integer value;
     private int countOfElem;
     private List<Integer> list;
@@ -24,12 +23,14 @@ public class RedBlackTreeTest {
     @Before
     public void initFullTreeTest() {
         rbtFull = new RedBlackTree<Integer>();
+        rbtFullMinus = new RedBlackTree<Integer>();
         value = 0;
         countOfElem = 10000;
 
         for (int i = 0; i <= countOfElem; i++) {
             value = i;
             rbtFull.add(value);
+            rbtFullMinus.add(-value);
         }
     }
 
@@ -37,15 +38,15 @@ public class RedBlackTreeTest {
     public void blackHeightWithIncreaseValueTest() {
         for (int i = 0; i <= countOfElem; i++) {
             value = i;
-            assertTrue(rbtFull.returnBlackHeightOfElem(value - 1) <= (int)(Math.log(countOfElem + 1) / Math.log(2)));
+            assertTrue(rbtFull.returnBlackHeightOfElem(value) <= (int)(Math.log(countOfElem + 1) / Math.log(2)));
         }
     }
 
     @Test
     public void blackHeightWithDecreaseValueTest() {
-        for (int i = 0; i <= countOfElem; i++) {
+        for (int i = 1; i <= countOfElem; i++) {
             value = -i;
-            assertTrue(rbtFull.returnBlackHeightOfElem(value - 1) <= (int)(Math.log(countOfElem + 1) / Math.log(2)));
+            assertTrue(rbtFullMinus.returnBlackHeightOfElem(value) <= (int)(Math.log(countOfElem + 1) / Math.log(2)));
         }
     }
 
